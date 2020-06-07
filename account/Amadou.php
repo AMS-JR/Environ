@@ -1,6 +1,6 @@
 <?php
 define('TEST',  getenv('TEST'));
-define('API', getenv('API');
+define('API', getenv('API'));
 class Amadou{
 //    const TEST = getenv('TEST');
 //    const API = getenv('API');
