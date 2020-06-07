@@ -1,9 +1,9 @@
 <?php
 class Amadou{
-   public $test = getenv('TEST');
-   public $API = getenv('API');
+   const TEST = getenv('TEST');
+   const API = getenv('API');
 public function env(){
- echo $this->test." and ".$this->API;
+ echo self::TEST." and ".self::API;
    }
  }
 ?>
