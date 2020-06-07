@@ -1,3 +1,4 @@
 <?
 echo "HELLLO AMADOU SARJO JALLOW";
-echo getenv('TEST');
+$ams = getenv('TEST');
+echo $ams;
