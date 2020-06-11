@@ -30,17 +30,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
     try {
         // FIXME: you should not use 'name' for the upload, since that's the original filename from the user's computer - generate a random filename that you then store in your database, or similar
         //$upload = $s3->upload($bucket, $_FILES['userfile']['name'], fopen($_FILES['userfile']['tmp_name'], 'rb'), 'public-read');
-
+        $valid_extensions = array('jpeg', 'jpg', 'png');
+        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));    
+        $key = array_keys($valid_extensions, $ext);
+            $contentType = array(
+               'jpeg' => 'image/jpeg',
+               'jpg' => 'image/jpeg',
+               'png' => 'image/png'
+            );
+        $Content_Type = $contentType[$key[0]];
+         
         $upload = $s3->putObject([
             'Bucket' => $bucket,
             'Key'    => rand(1000,1000000).$_FILES['userfile']['name'],
             'Body'   => fopen($_FILES['userfile']['tmp_name'], 'r'),
             'ACL'    => 'public-read',
-            'ContentType' => 'image/jpeg'
-            // array('params' => array(
-            //     'Metadata' => array(
-            //         'Content-Type' => 'image/jpeg'
-            // )))
+            'ContentType' => $Content_Type,
         ]);
 ?>
         <p>Upload <a href="<?=htmlspecialchars($upload->get('ObjectURL'))?>">successful</a> :</p>
