@@ -17,7 +17,7 @@ $s3 = new Aws\S3\S3Client([
     'version'  => 'latest',
     'region'   => 'us-east-1',
 ]);
- $bucket = getenv('S3_BUCKET_UPLOADS')?: die('No "S3_BUCKET_NAME" config var in found in env!');
+ $bucket = getenv('S3_BUCKET_UPLOADS')?: die('No "S3_BUCKET_UPLOADS" config var in found in env!');
 // $bucket = '';
 ?>
 <html>
@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
         $upload = $s3->putObject([
             'Bucket' => $bucket,
             'Key'    => $_FILES['userfile']['name'],
-            'Body'   => $_FILES['userfile']['tmp_name'],
+            'Body'   => fopen($_FILES['userfile']['tmp_name'], 'r'),
             'ACL'    => 'public-read',
             'ContentType' => 'image/jpeg'
             // array('params' => array(
