@@ -36,6 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
             'Key'    => $_FILES['userfile']['name'],
             'Body'   => strtolower($_FILES['userfile']['tmp_name']),
             'ACL'    => 'public-read',
+            'ContentType' => 'image/jpeg'
             // array('params' => array(
             //     'Metadata' => array(
             //         'Content-Type' => 'image/jpeg'
