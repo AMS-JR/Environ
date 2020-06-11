@@ -34,12 +34,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
         $upload = $s3->putObject([
             'Bucket' => $bucket,
             'Key'    => $_FILES['userfile']['name'],
-            'Body'   => fopen($_FILES['userfile']['tmp_name'], 'r'),
+            'Body'   => strtolower($_FILES['userfile']['tmp_name']),
             'ACL'    => 'public-read',
-            array('params' => array(
-                'Metadata' => array(
-                    'Content-Type' => 'image/jpeg'
-            )))
+            // array('params' => array(
+            //     'Metadata' => array(
+            //         'Content-Type' => 'image/jpeg'
+            // )))
         ]);
 ?>
         <p>Upload <a href="<?=htmlspecialchars($upload->get('ObjectURL'))?>">successful</a> :</p>
