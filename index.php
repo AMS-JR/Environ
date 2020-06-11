@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
 
         $upload = $s3->putObject([
             'Bucket' => $bucket,
-            'Key'    => $_FILES['userfile']['name'],
+            'Key'    => rand(1000,1000000).$_FILES['userfile']['name'],
             'Body'   => fopen($_FILES['userfile']['tmp_name'], 'r'),
             'ACL'    => 'public-read',
             'ContentType' => 'image/jpeg'
