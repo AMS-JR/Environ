@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES
         $upload = $s3->putObject([
             'Bucket' => $bucket,
             'Key'    => $_FILES['userfile']['name'],
-            'Body'   => strtolower($_FILES['userfile']['tmp_name']),
+            'Body'   => $_FILES['userfile']['tmp_name'],
             'ACL'    => 'public-read',
             'ContentType' => 'image/jpeg'
             // array('params' => array(
